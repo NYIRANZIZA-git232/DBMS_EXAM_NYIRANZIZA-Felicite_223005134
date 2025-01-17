@@ -1,0 +1,551 @@
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database exam;
+Query OK, 1 row affected (0.007 sec)
+
+MariaDB [(none)]> use exam;
+Database changed
+MariaDB [exam]> create table Client_master(clientNO int(4)primary key auto_increment,Name varchar(225),Address varchar(255),City varchar(255),State varchar(255),Bal_due int(5));
+Query OK, 0 rows affected (0.015 sec)
+
+
+MariaDB [(none)]> use exam;
+Database changed
+MariaDB [exam]> desc Cleint_master;
+ERROR 1146 (42S02): Table 'exam.cleint_master' doesn't exist
+MariaDB [exam]> desc Client_master;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| clientNO | int(4)       | NO   | PRI | NULL    | auto_increment |
+| Name     | varchar(225) | YES  |     | NULL    |                |
+| Address  | varchar(255) | YES  |     | NULL    |                |
+| City     | varchar(255) | YES  |     | NULL    |                |
+| State    | varchar(255) | YES  |     | NULL    |                |
+| Bal_due  | int(5)       | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+6 rows in set (0.022 sec)
+
+MariaDB [exam]> insert into Client_master values('',"mugabo innocent","KN345","kigali","kigali",25000);
+Query OK, 1 row affected, 1 warning (0.030 sec)
+
+MariaDB [exam]> insert into Client_master values('',"kalimba james","Ny345","eastern province","nyagatare",25500);
+Query OK, 1 row affected, 1 warning (0.012 sec)
+
+MariaDB [exam]> insert into Client_master values('',"ntaganda innocent","RUB745","WESTERN province","RUBAVU",36000);
+Query OK, 1 row affected, 1 warning (0.017 sec)
+
+MariaDB [exam]> insert into Client_master values('',"RUKUNDO james","nz745","southern province","nyanza",670000);
+Query OK, 1 row affected, 1 warning (0.017 sec)
+
+MariaDB [exam]> insert into Client_master values('',"nkundimana innocent","huy745","southern province","HUYE",450000);
+Query OK, 1 row affected, 1 warning (0.017 sec)
+
+MariaDB [exam]> select * from Client_master;
++----------+---------------------+---------+-------------------+-----------+---------+
+| clientNO | Name                | Address | City              | State     | Bal_due |
++----------+---------------------+---------+-------------------+-----------+---------+
+|        1 | mugabo innocent     | KN345   | kigali            | kigali    |   25000 |
+|        2 | kalimba james       | Ny345   | eastern province  | nyagatare |   25500 |
+|        3 | ntaganda innocent   | RUB745  | WESTERN province  | RUBAVU    |   36000 |
+|        4 | RUKUNDO james       | nz745   | southern province | nyanza    |  670000 |
+|        5 | nkundimana innocent | huy745  | southern province | HUYE      |  450000 |
++----------+---------------------+---------+-------------------+-----------+---------+
+5 rows in set (0.001 sec)
+
+
+MariaDB [exam]> select * from Client_master where bal_due>500;
++----------+---------------------+---------+-------------------+-----------+---------+
+| clientNO | Name                | Address | City              | State     | Bal_due |
++----------+---------------------+---------+-------------------+-----------+---------+
+|        1 | mugabo innocent     | KN345   | kigali            | kigali    |   25000 |
+|        2 | kalimba james       | Ny345   | eastern province  | nyagatare |   25500 |
+|        3 | ntaganda innocent   | RUB745  | WESTERN province  | RUBAVU    |   36000 |
+|        4 | RUKUNDO james       | nz745   | southern province | nyanza    |  670000 |
+|        5 | nkundimana innocent | huy745  | southern province | HUYE      |  450000 |
++----------+---------------------+---------+-------------------+-----------+---------+
+5 rows in set (0.001 sec)
+
+MariaDB [exam]> Update Client_master SET Bal_due=5100 where clientNO=3;
+Query OK, 1 row affected (0.018 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [exam]> select * from client_master;
++----------+---------------------+---------+-------------------+-----------+---------+
+| clientNO | Name                | Address | City              | State     | Bal_due |
++----------+---------------------+---------+-------------------+-----------+---------+
+|        1 | mugabo innocent     | KN345   | kigali            | kigali    |   25000 |
+|        2 | kalimba james       | Ny345   | eastern province  | nyagatare |   25500 |
+|        3 | ntaganda innocent   | RUB745  | WESTERN province  | RUBAVU    |    5100 |
+|        4 | RUKUNDO james       | nz745   | southern province | nyanza    |  670000 |
+|        5 | nkundimana innocent | huy745  | southern province | HUYE      |  450000 |
++----------+---------------------+---------+-------------------+-----------+---------+
+5 rows in set (0.001 sec)
+
+
+MariaDB [exam]> ALTER TABLE CLIENT_MASTER RENAME TO Client12;
+Query OK, 0 rows affected (0.017 sec)
+
+MariaDB [exam]> show tables;
++----------------+
+| Tables_in_exam |
++----------------+
+| client12       |
++----------------+
+1 row in set (0.002 sec)
+
+MariaDB [exam]>
+
+
+MariaDB [exam]> create table department(depid int(4)primary key auto_increment,dep_name varchar(255),address varchar(255),detlocation varchar(255),depoffice varchar(255));
+Query OK, 0 rows affected (0.033 sec)
+
+MariaDB [exam]> desc department;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| depid       | int(4)       | NO   | PRI | NULL    | auto_increment |
+| dep_name    | varchar(255) | YES  |     | NULL    |                |
+| address     | varchar(255) | YES  |     | NULL    |                |
+| detlocation | varchar(255) | YES  |     | NULL    |                |
+| depoffice   | varchar(255) | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.014 sec)
+
+MariaDB [exam]> create table employee (empid int(4)primary key auto_increment,depid int(4),foreign key(depid) references department(d
+epid),emp_name varchar(255),emp_tel int(11),empsalary int(5));
+Query OK, 0 rows affected (0.037 sec)
+
+MariaDB [exam]> desc employee;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| empid     | int(4)       | NO   | PRI | NULL    | auto_increment |
+| depid     | int(4)       | YES  | MUL | NULL    |                |
+| emp_name  | varchar(255) | YES  |     | NULL    |                |
+| emp_tel   | int(11)      | YES  |     | NULL    |                |
+| empsalary | int(5)       | YES  |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+5 rows in set (0.026 sec)
+
+MariaDB [exam]>
+
+
+MariaDB [exam]> insert into department values('',"BIT","HUYE","southern province","HUYE");
+Query OK, 1 row affected, 1 warning (0.017 sec)
+
+MariaDB [exam]> insert into department values('',"ACC","HUYE","southern province","HUYE");
+Query OK, 1 row affected, 1 warning (0.017 sec)
+
+MariaDB [exam]> insert into department values('',"FINANCE","HUYE","southern province","HUYE");
+Query OK, 1 row affected, 1 warning (0.004 sec)
+
+MariaDB [exam]> insert into department values('',"TRANSPORT AND LOGISITICS","HUYE","southern province","HUYE");
+Query OK, 1 row affected, 1 warning (0.004 sec)
+
+MariaDB [exam]> insert into department values('',"BBA","HUYE","southern province","HUYE");
+Query OK, 1 row affected, 1 warning (0.018 sec)
+
+MariaDB [exam]> SELECT * FROM department;
++-------+--------------------------+---------+-------------------+-----------+
+| depid | dep_name                 | address | detlocation       | depoffice |
++-------+--------------------------+---------+-------------------+-----------+
+|     1 | BIT                      | HUYE    | southern province | HUYE      |
+|     2 | ACC                      | HUYE    | southern province | HUYE      |
+|     3 | FINANCE                  | HUYE    | southern province | HUYE      |
+|     4 | TRANSPORT AND LOGISITICS | HUYE    | southern province | HUYE      |
+|     5 | BBA                      | HUYE    | southern province | HUYE      |
++-------+--------------------------+---------+-------------------+-----------+
+5 rows in set (0.001 sec)
+
+> insert into employee values('',1,"bahizi james",0783401856,250000);
+Query OK, 1 row affected, 1 warning (0.017 sec)
+
+MariaDB [exam]> insert into employee values('',2,"nkurunziza emmy",0783401855,450000);
+Query OK, 1 row affected, 1 warning (0.004 sec)
+
+MariaDB [exam]> insert into employee values('',2,"kabanda james",0783405855,450500);
+Query OK, 1 row affected, 1 warning (0.018 sec)
+
+MariaDB [exam]> insert into employee values('',3,"mukunzi innocent",0783404855,460500);
+Query OK, 1 row affected, 1 warning (0.017 sec)
+
+MariaDB [exam]> insert into employee values('',4,"mukunzi james",0784404855,60500);
+Query OK, 1 row affected, 1 warning (0.017 sec)
+
+MariaDB [exam]> insert into employee values('',5,"karuhanga james",0784704855,70500);
+Query OK, 1 row affected, 1 warning (0.017 sec)
+
+
+MariaDB [exam]> select * from employee;
++-------+-------+------------------+-----------+-----------+
+| empid | depid | emp_name         | emp_tel   | empsalary |
++-------+-------+------------------+-----------+-----------+
+|     1 |     1 | bahizi james     | 783401856 |    250000 |
+|     2 |     2 | nkurunziza emmy  | 783401855 |    450000 |
+|     4 |     3 | mukunzi innocent | 783404855 |    460500 |
+|     5 |     4 | mukunzi james    | 784404855 |     60500 |
+|     6 |     5 | karuhanga james  | 784704855 |     70500 |
++-------+-------+------------------+-----------+-----------+
+5 rows in set (0.001 sec)
+
+MariaDB [exam]> select employee.emp_name,department.dep_name from employee LEFT JOIN department ON department.depid= employee.empid;
++------------------+--------------------------+
+| emp_name         | dep_name                 |
++------------------+--------------------------+
+| bahizi james     | BIT                      |
+| nkurunziza emmy  | ACC                      |
+| mukunzi innocent | TRANSPORT AND LOGISITICS |
+| mukunzi james    | BBA                      |
+| karuhanga james  | NULL                     |
++------------------+--------------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [exam]> select employee.emp_name,department.dep_name from employee RIGHT JOIN department ON department.depid= employee.empid;
+
++------------------+--------------------------+
+| emp_name         | dep_name                 |
++------------------+--------------------------+
+| bahizi james     | BIT                      |
+| nkurunziza emmy  | ACC                      |
+| NULL             | FINANCE                  |
+| mukunzi innocent | TRANSPORT AND LOGISITICS |
+| mukunzi james    | BBA                      |
++------------------+--------------------------+
+5 rows in set (0.001 sec)
+
+
+MariaDB [exam]> select MAX(empsalary)  AS empsalary from employee HAVING AVG(empsalary);
++-----------+
+| empsalary |
++-----------+
+|    460500 |
++-----------+
+1 row in set (0.001 sec)
+
+MariaDB [exam]>
+
+MariaDB [exam]> create table student (studentid int(6)primary key auto_increment,fullname varchar(25),gender varchar(2),age int(2),de
+partment varchar(30));
+Query OK, 0 rows affected (0.034 sec)
+
+MariaDB [exam]> desc student;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| studentid  | int(6)      | NO   | PRI | NULL    | auto_increment |
+| fullname   | varchar(25) | YES  |     | NULL    |                |
+| gender     | varchar(2)  | YES  |     | NULL    |                |
+| age        | int(2)      | YES  |     | NULL    |                |
+| department | varchar(30) | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.023 sec)
+
+
+MariaDB [exam]> insert into student values('',"murungi ange","F","20","BIT");
+Query OK, 1 row affected, 1 warning (0.018 sec)
+
+MariaDB [exam]> insert into student values('',"JAMES KALISA","M","19","ACC");
+Query OK, 1 row affected, 1 warning (0.015 sec)
+
+MariaDB [exam]> insert into student values('',"MAHORO PEACE","F","22","BBA");
+Query OK, 1 row affected, 1 warning (0.016 sec)
+
+MariaDB [exam]> insert into student values('',"KAGABO INNOCENT","M","18","FINC");
+Query OK, 1 row affected, 1 warning (0.015 sec)
+
+MariaDB [exam]> select * from student;
++-----------+-----------------+--------+------+------------+
+| studentid | fullname        | gender | age  | department |
++-----------+-----------------+--------+------+------------+
+|         1 | murungi ange    | F      |   20 | BIT        |
+|         2 | JAMES KALISA    | M      |   19 | ACC        |
+|         3 | MAHORO PEACE    | F      |   22 | BBA        |
+|         4 | KAGABO INNOCENT | M      |   18 | FINC       |
+|         5 | MUTESI WINE     | F      |   21 | ECONOMICS  |
++-----------+-----------------+--------+------+------------+
+5 rows in set (0.001 sec)
+
+
+MariaDB [exam]> create VIEW LIST AS select * from student;
+Query OK, 0 rows affected (0.019 sec)
+
+MariaDB [exam]> select * from list;
++-----------+-----------------+--------+------+------------+
+| studentid | fullname        | gender | age  | department |
++-----------+-----------------+--------+------+------------+
+|         1 | murungi ange    | F      |   20 | BIT        |
+|         2 | JAMES KALISA    | M      |   19 | ACC        |
+|         3 | MAHORO PEACE    | F      |   22 | BBA        |
+|         4 | KAGABO INNOCENT | M      |   18 | FINC       |
+|         5 | MUTESI WINE     | F      |   21 | ECONOMICS  |
++-----------+-----------------+--------+------+------------+
+5 rows in set (0.003 sec)
+
+MariaDB [exam]> create VIEW GIRL AS select * from student where gender="f";
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [exam]> select * from girl;
++-----------+--------------+--------+------+------------+
+| studentid | fullname     | gender | age  | department |
++-----------+--------------+--------+------+------------+
+|         1 | murungi ange | F      |   20 | BIT        |
+|         3 | MAHORO PEACE | F      |   22 | BBA        |
+|         5 | MUTESI WINE  | F      |   21 | ECONOMICS  |
++-----------+--------------+--------+------+------------+
+3 rows in set (0.002 sec)
+
+
+MariaDB [exam]> create VIEW boy AS select * from student where gender="m";
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [exam]> select * from boy;
++-----------+-----------------+--------+------+------------+
+| studentid | fullname        | gender | age  | department |
++-----------+-----------------+--------+------+------------+
+|         2 | JAMES KALISA    | M      |   19 | ACC        |
+|         4 | KAGABO INNOCENT | M      |   18 | FINC       |
++-----------+-----------------+--------+------+------------+
+2 rows in set (0.002 sec)
+
+MariaDB [exam]> delete from student where age <20;
+Query OK, 2 rows affected (0.016 sec)
+
+MariaDB [exam]> select * from student;
++-----------+--------------+--------+------+------------+
+| studentid | fullname     | gender | age  | department |
++-----------+--------------+--------+------+------------+
+|         1 | murungi ange | F      |   20 | BIT        |
+|         3 | MAHORO PEACE | F      |   22 | BBA        |
+|         5 | MUTESI WINE  | F      |   21 | ECONOMICS  |
++-----------+--------------+--------+------+------------+
+3 rows in set (0.001 sec)
+
+
+MariaDB [exam]> create table sales(saleNo int(4)primary key auto_increment,salesname varchar(255),Branch varchar(255),saleamount int(4),DOB varchar(255));
+Query OK, 0 rows affected (0.028 sec)
+
+MariaDB [exam]> desc sales;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| saleNo     | int(4)       | NO   | PRI | NULL    | auto_increment |
+| salesname  | varchar(255) | YES  |     | NULL    |                |
+| Branch     | varchar(255) | YES  |     | NULL    |                |
+| saleamount | int(4)       | YES  |     | NULL    |                |
+| DOB        | varchar(255) | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.026 sec)
+
+MariaDB [exam]> insert into sales values('',"nkuranga james","NYAGATARE",25000,"21-DEC-2009");
+Query OK, 1 row affected, 1 warning (0.014 sec)
+
+MariaDB [exam]> insert into sales values('',"KARAGWA ABUDUL","NYAMAGABE",30000,"2-DEC-2010");
+Query OK, 1 row affected, 1 warning (0.015 sec)
+
+MariaDB [exam]> insert into sales values('',"KALIMA EVARISTE","KIGALI",35000,"22-NOV-2011");
+Query OK, 1 row affected, 1 warning (0.016 sec)
+
+MariaDB [exam]> insert into sales values('',"MUHIRE INNOCENT","NYANZA",40000,"2-JAN-2005");
+Query OK, 1 row affected, 1 warning (0.004 sec)
+
+MariaDB [exam]> insert into sales values('',"KAGABO INNOCENT","HUYE",45000,"7-JUL-2004");
+Query OK, 1 row affected, 1 warning (0.004 sec)
+
+MariaDB [exam]> SELECT * FROM sales;
++--------+-----------------+-----------+------------+-------------+
+| saleNo | salesname       | Branch    | saleamount | DOB         |
++--------+-----------------+-----------+------------+-------------+
+|      1 | nkuranga james  | NYAGATARE |      25000 | 21-DEC-2009 |
+|      2 | KARAGWA ABUDUL  | NYAMAGABE |      30000 | 2-DEC-2010  |
+|      3 | KALIMA EVARISTE | KIGALI    |      35000 | 22-NOV-2011 |
+|      4 | MUHIRE INNOCENT | NYANZA    |      40000 | 2-JAN-2005  |
+|      5 | KAGABO INNOCENT | HUYE      |      45000 | 7-JUL-2004  |
++--------+-----------------+-----------+------------+-------------+
+5 rows in set (0.001 sec)
+
+MariaDB [exam]> select SUM(saleamount) from sales;
++-----------------+
+| SUM(saleamount) |
++-----------------+
+|          175000 |
++-----------------+
+1 row in set (0.002 sec)
+
+MariaDB [exam]> select AVG(saleamount) from sales;
++-----------------+
+| AVG(saleamount) |
++-----------------+
+|      35000.0000 |
++-----------------+
+1 row in set (0.001 sec)
+
+MariaDB [exam]> select salesname,DOB from sales where DOB="21-DEC-2009";
++----------------+-------------+
+| salesname      | DOB         |
++----------------+-------------+
+| nkuranga james | 21-DEC-2009 |
++----------------+-------------+
+1 row in set (0.001 sec)
+
+MariaDB [exam]> select salesname,DOB from sales ORDER BY DOB ASC;
++-----------------+-------------+
+| salesname       | DOB         |
++-----------------+-------------+
+| KARAGWA ABUDUL  | 2-DEC-2010  |
+| MUHIRE INNOCENT | 2-JAN-2005  |
+| nkuranga james  | 21-DEC-2009 |
+| KALIMA EVARISTE | 22-NOV-2011 |
+| KAGABO INNOCENT | 7-JUL-2004  |
++-----------------+-------------+
+5 rows in set (0.001 sec)
+
+MariaDB [exam]> select salesname,DOB from sales ORDER BY DOB DESC;
++-----------------+-------------+
+| salesname       | DOB         |
++-----------------+-------------+
+| KAGABO INNOCENT | 7-JUL-2004  |
+| KALIMA EVARISTE | 22-NOV-2011 |
+| nkuranga james  | 21-DEC-2009 |
+| MUHIRE INNOCENT | 2-JAN-2005  |
+| KARAGWA ABUDUL  | 2-DEC-2010  |
++-----------------+-------------+
+5 rows in set (0.001 sec)
+
+MariaDB [exam]>
+
+
+question 9:
+
+
+
+MariaDB [exam]> create table employees(employee_id int(4) primary key auto_increment,First_name varchar(255),Last_name varchar(255),Email varchar(255),phone_number int(11),hire_date varchar(225),job_id int(4),salary int (4),commission_pct varchar(225),manager_id int(4),department_id int(4));
+Query OK, 0 rows affected (0.034 sec)
+
+
+ desc employees;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| employee_id    | int(4)       | NO   | PRI | NULL    | auto_increment |
+| First_name     | varchar(255) | YES  |     | NULL    |                |
+| Last_name      | varchar(255) | YES  |     | NULL    |                |
+| Email          | varchar(255) | YES  |     | NULL    |                |
+| phone_number   | int(11)      | YES  |     | NULL    |                |
+| hire_date      | varchar(225) | YES  |     | NULL    |                |
+| job_id         | int(4)       | YES  |     | NULL    |                |
+| salary         | int(4)       | YES  |     | NULL    |                |
+| commission_pct | varchar(225) | YES  |     | NULL    |                |
+| manager_id     | int(4)       | YES  |     | NULL    |                |
+| department_id  | int(4)       | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+11 rows in set (0.024 sec)
+
+MariaDB [exam]> insert into employees values('',"kagabo","innocent","innocent@gmail.com",0783401856,"23-dec-2009",23,"comm",100,60);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [exam]> insert into employees values('',"kagabo","innocent","innocent@gmail.com",0783401856,"23-dec-2009",23,4800,"comm",100,
+60);
+Query OK, 1 row affected, 1 warning (0.003 sec)
+
+MariaDB [exam]> insert into employees values('',"james","muhire","muhire@gmail.com",0783401857,"21-jan-2019",24,5800,"comm",90,70);
+Query OK, 1 row affected, 1 warning (0.017 sec)
+
+MariaDB [exam]> insert into employees values('',"james","bahati","bahati@gmail.com",0783401859,"22-dec-2020",25,3800,"comm",100,80);
+Query OK, 1 row affected, 1 warning (0.016 sec)
+
+MariaDB [exam]> insert into employees values('',"murindwa","austin","austin@gmail.com",0783401859,"22-dec-2018",25,6800,"comm",99,90)
+;
+Query OK, 1 row affected, 1 warning (0.020 sec)
+
+MariaDB [exam]> insert into employees values('',"kanimba","mugabo","mugabo@gmail.com",0783301859,"22-june-2017",75,7800,"comm",66,20)
+;
+Query OK, 1 row affected, 1 warning (0.003 sec)
+
+MariaDB [exam]> select * from employees;
++-------------+------------+-----------+--------------------+--------------+--------------+--------+--------+----------------+------------+---------------+
+| employee_id | First_name | Last_name | Email              | phone_number | hire_date    | job_id | salary | commission_pct | manager_id | department_id |
++-------------+------------+-----------+--------------------+--------------+--------------+--------+--------+----------------+------------+---------------+
+|           1 | kagabo     | innocent  | innocent@gmail.com |    783401856 | 23-dec-2009  |     23 |   4800 | comm           |        100 |            60 |
+|           2 | james      | muhire    | muhire@gmail.com   |    783401857 | 21-jan-2019  |     24 |   5800 | comm           |         90 |            70 |
+|           3 | james      | bahati    | bahati@gmail.com   |    783401859 | 22-dec-2020  |     25 |   3800 | comm           |        100 |            80 |
+|           4 | murindwa   | austin    | austin@gmail.com   |    783401859 | 22-dec-2018  |     25 |   6800 | comm           |         99 |            90 |
+|           5 | kanimba    | mugabo    | mugabo@gmail.com   |    783301859 | 22-june-2017 |     75 |   7800 | comm           |         66 |            20 |
++-------------+------------+-----------+--------------------+--------------+--------------+--------+--------+----------------+------------+---------------+
+5 rows in set (0.001 sec)
+
+MariaDB [exam]> select empployee_id,First_name,Last_name,salary from employees;
+ERROR 1054 (42S22): Unknown column 'empployee_id' in 'field list'
+MariaDB [exam]> select employee_id,First_name,Last_name,salary from employees;
++-------------+------------+-----------+--------+
+| employee_id | First_name | Last_name | salary |
++-------------+------------+-----------+--------+
+|           1 | kagabo     | innocent  |   4800 |
+|           2 | james      | muhire    |   5800 |
+|           3 | james      | bahati    |   3800 |
+|           4 | murindwa   | austin    |   6800 |
+|           5 | kanimba    | mugabo    |   7800 |
++-------------+------------+-----------+--------+
+5 rows in set (0.001 sec)
+
+MariaDB [exam]> select * from employees where manager_id=100;
++-------------+------------+-----------+--------------------+--------------+-------------+--------+--------+----------------+------------+---------------+
+| employee_id | First_name | Last_name | Email              | phone_number | hire_date   | job_id | salary | commission_pct | manager_id | department_id |
++-------------+------------+-----------+--------------------+--------------+-------------+--------+--------+----------------+------------+---------------+
+|           1 | kagabo     | innocent  | innocent@gmail.com |    783401856 | 23-dec-2009 |     23 |   4800 | comm           |        100 |            60 |
+|           3 | james      | bahati    | bahati@gmail.com   |    783401859 | 22-dec-2020 |     25 |   3800 | comm           |        100 |            80 |
++-------------+------------+-----------+--------------------+--------------+-------------+--------+--------+----------------+------------+---------------+
+2 rows in set (0.001 sec)
+
+MariaDB [exam]> select First_name,Last_name where salary >=4800;
+ERROR 1054 (42S22): Unknown column 'First_name' in 'field list'
+MariaDB [exam]> select First_name,Last_name from employeses where salary >=4800;
+ERROR 1146 (42S02): Table 'exam.employeses' doesn't exist
+MariaDB [exam]> select First_name,Last_name from employees where salary >=4800;
++------------+-----------+
+| First_name | Last_name |
++------------+-----------+
+| kagabo     | innocent  |
+| james      | muhire    |
+| murindwa   | austin    |
+| kanimba    | mugabo    |
++------------+-----------+
+4 rows in set (0.001 sec)
+
+MariaDB [exam]> select First_name,Last_name, salary from employees where salary >=4800;
++------------+-----------+--------+
+| First_name | Last_name | salary |
++------------+-----------+--------+
+| kagabo     | innocent  |   4800 |
+| james      | muhire    |   5800 |
+| murindwa   | austin    |   6800 |
+| kanimba    | mugabo    |   7800 |
++------------+-----------+--------+
+4 rows in set (0.001 sec)
+
+MariaDB [exam]> select * from  employees where Last_name LIKE 'austin%';
++-------------+------------+-----------+------------------+--------------+-------------+--------+--------+----------------+------------+---------------+
+| employee_id | First_name | Last_name | Email            | phone_number | hire_date   | job_id | salary | commission_pct | manager_id | department_id |
++-------------+------------+-----------+------------------+--------------+-------------+--------+--------+----------------+------------+---------------+
+|           4 | murindwa   | austin    | austin@gmail.com |    783401859 | 22-dec-2018 |     25 |   6800 | comm           |         99 |            90 |
++-------------+------------+-----------+------------------+--------------+-------------+--------+--------+----------------+------------+---------------+
+1 row in set (0.002 sec)
+
+MariaDB [exam]> select * from employees where department IN(60,70,80);
+ERROR 1054 (42S22): Unknown column 'department' in 'where clause'
+MariaDB [exam]> select * from employees where department_id IN(60,70,80);
++-------------+------------+-----------+--------------------+--------------+-------------+--------+--------+----------------+------------+---------------+
+| employee_id | First_name | Last_name | Email              | phone_number | hire_date   | job_id | salary | commission_pct | manager_id | department_id |
++-------------+------------+-----------+--------------------+--------------+-------------+--------+--------+----------------+------------+---------------+
+|           1 | kagabo     | innocent  | innocent@gmail.com |    783401856 | 23-dec-2009 |     23 |   4800 | comm           |        100 |            60 |
+|           2 | james      | muhire    | muhire@gmail.com   |    783401857 | 21-jan-2019 |     24 |   5800 | comm           |         90 |            70 |
+|           3 | james      | bahati    | bahati@gmail.com   |    783401859 | 22-dec-2020 |     25 |   3800 | comm           |        100 |            80 |
++-------------+------------+-----------+--------------------+--------------+-------------+--------+--------+----------------+------------+---------------+
+3 rows in set (0.001 sec)
+
+MariaDB [exam]>
